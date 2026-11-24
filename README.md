@@ -1,27 +1,40 @@
-# agent-ready
+# agent-ready: a Claude skill for building WebMCP tools
 
-A free Claude skill for **building WebMCP tools for websites** (your own or your clients') and for making a site ready for AI agents. It runs in claude.ai, Claude Desktop and Claude Code. MIT licensed, **updated every week**.
+A free Claude skill for **building WebMCP tools for websites**, whether the site is yours or a client's. It runs in claude.ai, Claude Desktop and Claude Code. MIT licensed, **updated every week**.
 
 **[Download the latest zip](https://github.com/Pacamaraprogress/agent-ready/releases/latest/download/agent-ready.zip)** · [Releases](https://github.com/Pacamaraprogress/agent-ready/releases) · [Changelog](CHANGELOG.md) · [Türkçe](#türkçe)
 
-## What WebMCP is, in one paragraph
+## What WebMCP is
 
-WebMCP lets a web page give the AI agent in a visitor's browser a set of tools, such as "find the nearest location", "what are this product's dimensions" or "fill in the quote form for me". The agent then answers from the site's own content and lands on the right page or form, instead of guessing from a screenshot. Chrome runs it as an origin trial today.
+WebMCP lets a web page give the AI agent in a visitor's browser a set of tools. Examples: "find the nearest location", "what are this product's dimensions", "fill in the quote form for me". The agent then answers from the site's own content and lands on the right page or form, instead of guessing from a screenshot. The [specification](https://webmachinelearning.github.io/webmcp/) is a draft of the W3C Web Machine Learning Community Group. Chrome runs it as an origin trial today.
 
 This skill holds field notes from seven real WebMCP builds made in October and November 2026: six for WordPress and one for Next.js, four of them running on live sites. With it, Claude can plan, build, review, test and ship WebMCP tools for any site you work on.
 
-## What it helps you do
+## What the skill covers
 
-- **Build WebMCP tools.** It follows the build guide in [`references/webmcp-build-guide.md`](skills/agent-ready/references/webmcp-build-guide.md):
-  - Tool design rules: read-only tools first, and a form is never submitted on the visitor's behalf.
-  - The three tool hints (read-only, consequential, untrusted content) and `outputSchema`.
-  - Reading answers from the site's own pages, and the WordPress traps (page builders, password-protected pages, caching).
-  - A security pass for the route that serves the answers.
-  - Counting tool use in GA4 through Tag Manager.
-  - The origin-trial token, a testing ladder, a release checklist, and how to work with the site owner.
-- **Audit a site.** It checks robots.txt rules for AI bots, llms.txt, AGENTS.md, Content Signals, Markdown content negotiation, MCP Server Cards, the AI Catalog and the API Catalog. You get a fix list in priority order, with the file contents to publish, not just a score.
-- **Write the files.** It drafts robots.txt, llms.txt, AGENTS.md and the protocol files for your site type (docs, marketing site, SaaS, e-commerce, code repo). It puts them in a draft folder first, so it never overwrites your existing files.
-- **Answer questions.** "Is llms.txt a real standard?" or "Does Google use AGENTS.md?" get an answer with the adoption status and the primary source.
+The heart of the skill is the build guide, [`webmcp-build-guide.md`](skills/agent-ready/references/webmcp-build-guide.md):
+
+- **Plan:** the visitor journeys worth a tool, and a topic map for high-intent questions.
+- **Design:** read-only tools first, and a form is never submitted on the visitor's behalf. The three tool hints (read-only, consequential, untrusted content), `outputSchema` with an error branch that matches too, and tools that never throw.
+- **Build:** reading answers from the site's own pages, and the WordPress traps (page builders, password-protected pages, caching).
+- **Secure:** a security pass for the route that serves the answers.
+- **Measure:** counting tool use in GA4 through Tag Manager.
+- **Ship:** the origin-trial token, a testing ladder, a release checklist, page speed, and how to work with the site owner.
+
+## Browsers (checked November 2026)
+
+WebMCP works only in Chromium-based browsers for now.
+
+| Browser | Engine | WebMCP status |
+| --- | --- | --- |
+| Google Chrome | Chromium | Origin trial (Chrome 149 to 162). Without a trial token on the page, only a browser started with the `--enable-features=WebMCP` flag sees the tools. The new `Tool` interface reaches Stable with Chrome 160 on 5 January 2027. |
+| Microsoft Edge | Chromium | Edge's own origin trial (Edge 150) with its own token. In tests it also honoured a valid Chrome token. |
+| Brave | Chromium | Behind the flag; in tests it honoured a valid Chrome token. Brave's assistant **Leo** is expected to use a site's tools by default from Brave 1.102.2 (expected 5 January 2027). That makes it the first browser assistant to call a site's tools with no test flag on the visitor's side. |
+| Opera, Vivaldi and other Chromium-based browsers | Chromium | Same engine, but **not tested**. Don't promise them to a client until you have tried them. |
+| Safari | WebKit | Not supported. WebKit's standards position is "oppose". |
+| Firefox | Gecko | Not supported. Mozilla's standards position is "neutral". |
+
+The API is still changing, so check the [implementation status page](https://github.com/webmachinelearning/webmcp/blob/main/implementation-status.md) before you quote a version. Keeping up with these changes is the reason for the weekly updates.
 
 ## Install
 
@@ -63,14 +76,13 @@ You don't need to name the skill; Claude picks it up from requests like these:
 - "Plan WebMCP tools for example.com. Which visitor journeys deserve a tool?"
 - "Build a WordPress plugin that registers WebMCP tools to find our showrooms and start a quote request. It must never submit the form."
 - "Review this WebMCP plugin against the build guide before I ship it."
-- "Audit example.com for agent readiness and give me the fixes in priority order."
-- "Write robots.txt, llms.txt and AGENTS.md for our docs site."
+- "Write a test that checks every tool answer against its outputSchema."
+- "How do I count WebMCP tool calls in GA4 without double counting?"
 
 ## Good to know
 
 - **WebMCP tools do not change Google rankings.** Their value is that an agent visiting the site gets correct answers and is sent to the right page or form.
-- **Chromium only for now.** Chrome runs WebMCP as an origin trial, and Edge has its own. Brave's assistant Leo is expected to use a site's tools by default from Brave 1.102.2 (expected January 2027). WebKit opposes the proposal; Mozilla is neutral.
-- **The API is still changing.** One example: the new `Tool` interface reaches Chrome Stable with Chrome 160 on 5 January 2027. Versions and dates in the guide were checked in November 2026, so re-check them before you quote them. Keeping up with these changes is the reason for the weekly updates.
+- Versions and dates in the guide were checked in November 2026. Re-check them before you quote them.
 - The examples come from US local-business and e-commerce sites. Adapt them to your market.
 - The files are in English. Claude answers in the language you write in.
 
@@ -78,19 +90,19 @@ You don't need to name the skill; Claude picks it up from requests like these:
 
 ```
 skills/agent-ready/
-├── SKILL.md                         how Claude uses the skill (audit, author, reference)
+├── SKILL.md                         how Claude uses the skill
 ├── references/
-│   ├── webmcp-build-guide.md        the WebMCP field notes
-│   ├── protocol-discovery.md        MCP Server Card, AI Catalog, API Catalog, promoting an MCP server
-│   ├── content-accessibility.md     Markdown negotiation, llms.txt, token budgets
-│   ├── bot-access-control.md        Content Signals, Web Bot Auth, AI bot types
-│   ├── discoverability.md           robots.txt for AI bots, sitemaps, Link headers
-│   ├── agents-md.md                 the AGENTS.md spec
+│   ├── webmcp-build-guide.md        the WebMCP field notes (start here)
+│   ├── protocol-discovery.md        WebMCP in context: MCP Server Cards, AI Catalog, API Catalog
+│   ├── content-accessibility.md     Markdown negotiation, llms.txt
+│   ├── bot-access-control.md        Content Signals, Web Bot Auth
+│   ├── discoverability.md           robots.txt for AI bots, sitemaps
+│   ├── agents-md.md                 AGENTS.md
 │   └── adoption-stats.md            adoption numbers with dates and sources
-└── assets/
-    ├── checklists/audit-checklist.md
-    └── templates/                   robots.txt, llms.txt, AGENTS.md, JSON templates
+└── assets/                          an audit checklist and file templates
 ```
+
+The skill also carries a smaller reference on making a site readable for AI agents in general (the files under `references/` other than the build guide). Claude uses it when you ask for that, but WebMCP is what this project is about.
 
 ## Updates
 
@@ -100,14 +112,18 @@ The skill is updated every week with what new builds and spec changes teach. Eac
 
 Tried it on your own site? Please [open an issue](https://github.com/Pacamaraprogress/agent-ready/issues) and say what worked, what didn't, and on which kind of site and browser. Useful findings go into the next update.
 
-## Sources
+## Official WebMCP sources
 
-- [Agentic Engine Optimization — Addy Osmani](https://addyosmani.com/blog/agentic-engine-optimization/)
-- [Introducing the Agent Readiness Score — Cloudflare](https://blog.cloudflare.com/agent-readiness/)
-- [Chrome WebMCP documentation](https://developer.chrome.com/docs/ai/webmcp)
-- [webmachinelearning/webmcp (W3C community group)](https://github.com/webmachinelearning/webmcp)
-
-Each reference file lists its own primary sources.
+- [WebMCP specification](https://webmachinelearning.github.io/webmcp/): Draft Community Group Report, W3C Web Machine Learning Community Group
+- [webmachinelearning/webmcp](https://github.com/webmachinelearning/webmcp): the spec repo, with the explainer and open issues
+  - [Implementation status](https://github.com/webmachinelearning/webmcp/blob/main/implementation-status.md): browsers and assistants
+  - [Continuations explainer](https://github.com/webmachinelearning/webmcp/blob/main/continuations-explainer.md): tools that carry over to the next page
+- [webmachinelearning/webmcp-types](https://github.com/webmachinelearning/webmcp-types): TypeScript types, including the `Tool` interface
+- [w3c-oss/webmcp-polyfill](https://github.com/w3c-oss/webmcp-polyfill): the official polyfill, `@w3c/webmcp-polyfill`. For test pages only, never on a live site.
+- [GoogleChromeLabs/webmcp-tools](https://github.com/GoogleChromeLabs/webmcp-tools): the Chrome team's developer tools and demos, including [webmcp-skills](https://github.com/GoogleChromeLabs/webmcp-tools/tree/main/webmcp-skills)
+- [GoogleChromeLabs/webmcp-extension](https://github.com/GoogleChromeLabs/webmcp-extension): Google's example agent extension for testing
+- Chrome documentation: [WebMCP](https://developer.chrome.com/docs/ai/webmcp) and [WebMCP tool security](https://developer.chrome.com/docs/ai/webmcp/secure-tools)
+- Standards positions: [WebKit #670](https://github.com/WebKit/standards-positions/issues/670), [Mozilla #1412](https://github.com/mozilla/standards-positions/issues/1412)
 
 ## License
 
@@ -117,12 +133,19 @@ Each reference file lists its own primary sources.
 
 ## Türkçe
 
-**agent-ready**, web sitelerine (kendi sitenize ya da müşterilerinizin sitelerine) **WebMCP araçları kurmak** ve siteyi yapay zeka ajanlarına hazırlamak için ücretsiz bir Claude skill'i. claude.ai, Claude Desktop ve Claude Code'da çalışır. MIT lisanslıdır, herkes kullanabilir. **Her hafta güncellenir.**
+**agent-ready**, web sitelerine (kendi sitenize ya da müşterilerinizin sitelerine) **WebMCP araçları kurmak** için ücretsiz bir Claude skill'i. claude.ai, Claude Desktop ve Claude Code'da çalışır. MIT lisanslıdır, herkes kullanabilir. **Her hafta güncellenir.**
 
 WebMCP, sitenin ziyaretçinin tarayıcısındaki yapay zeka ajanına kendi araçlarını sunmasını sağlar. Örneğin "en yakın şube hangisi", "bu ürünün ölçüleri ne" ya da "teklif formunu doldur". Ajan tahmin etmek yerine sitenin kendi içeriğinden cevap verir. Skill'in içinde canlı sitelerde yapılmış WebMCP kurulumlarından çıkan notlar var: araç tasarım kuralları, WordPress tuzakları, güvenlik kontrolü, GA4'te ölçüm, test merdiveni ve sürüm kontrol listesi.
+
+**Hangi tarayıcılarda çalışıyor (Kasım 2026):** Yalnızca Chromium tabanlı tarayıcılarda.
+- **Google Chrome:** Origin trial (Chrome 149–162). Sayfada token yoksa araçları yalnızca `--enable-features=WebMCP` ile açılan tarayıcı görür.
+- **Microsoft Edge:** Kendi origin trial'ı (Edge 150) ve kendi token'ı var. Testlerde geçerli bir Chrome token'ını da kabul etti.
+- **Brave:** Bayrakla açılıyor. Brave'in asistanı **Leo**, Brave 1.102.2 ile (5 Ocak 2027 bekleniyor) sitenin araçlarını varsayılan olarak kullanmaya başlayacak.
+- **Opera, Vivaldi ve diğer Chromium tabanlı tarayıcılar:** Motor aynı ama test edilmedi. Denemeden müşteriye söz vermeyin.
+- **Safari ve Firefox:** Desteklemiyor.
 
 **Kurulum:**
 - **claude.ai / Claude Desktop:** [agent-ready.zip](https://github.com/Pacamaraprogress/agent-ready/releases/latest/download/agent-ready.zip) dosyasını indirin. Zip'i açmadan **Özelleştir → Skills → + → Skill yükle** adımıyla yükleyin. Ayarlar'da kod çalıştırma açık olmalı. Güncellemek için aynı bağlantıdan yeniden indirip yeniden yükleyin.
 - **Claude Code:** `/plugin marketplace add Pacamaraprogress/agent-ready`, ardından `/plugin install agent-ready@agent-ready` yazın. Haftalık güncelleme için `/plugin marketplace update agent-ready` ve `/plugin update agent-ready@agent-ready` yazın.
 
-Dosyalar İngilizce, ama Claude'a Türkçe yazarsanız Türkçe cevap verir. WebMCP araçları Google sıralamasını değiştirmez. Şimdilik yalnızca Chromium tabanlı tarayıcılarda çalışır. Geri bildiriminizi [Issues](https://github.com/Pacamaraprogress/agent-ready/issues) bölümüne yazabilirsiniz.
+Dosyalar İngilizce, ama Claude'a Türkçe yazarsanız Türkçe cevap verir. WebMCP araçları Google sıralamasını değiştirmez. Resmi kaynaklar yukarıdaki "Official WebMCP sources" bölümünde. Geri bildiriminizi [Issues](https://github.com/Pacamaraprogress/agent-ready/issues) bölümüne yazabilirsiniz.

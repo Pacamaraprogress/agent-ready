@@ -5,16 +5,24 @@
     "url": "https://github.com/Pacamaraprogress"
   },
   "metadata": {
-    "description": "The agent-ready skill: build WebMCP tools and make websites ready for AI agents."
+    "description": "The agent-ready skill: build WebMCP tools for websites."
   },
   "plugins": [
     {
       "name": "agent-ready",
       "source": "./",
       "version": "2026.11.24",
-      "description": "Build WebMCP tools for websites and make sites agent-ready: robots.txt for AI bots, llms.txt, AGENTS.md, Content Signals, Markdown negotiation, MCP Server Cards. Field notes from live WebMCP builds, updated weekly.",
+      "description": "Build WebMCP tools for websites: plan, design, build, secure, measure, test and ship in-page tools for browser agents. Field notes from seven real builds, updated weekly.",
       "license": "MIT",
-      "keywords": ["webmcp", "agent-ready", "aeo", "llms-txt", "agents-md", "mcp", "seo", "wordpress"]
+      "keywords": [
+        "webmcp",
+        "browser-agents",
+        "ai-agents",
+        "mcp",
+        "wordpress",
+        "chrome",
+        "seo"
+      ]
     }
   ]
 }

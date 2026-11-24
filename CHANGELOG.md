@@ -11,4 +11,4 @@ First public release.
   - The Chrome 160 `Tool` interface, which reaches Stable on 5 January 2027.
   - Brave Leo uses WebMCP tools by default from Brave 1.102.2, which Brave expects in January 2027.
   - The W3C `@w3c/webmcp-polyfill` (0.2.0): use it for testing only, never on a live site.
-- Agent-readiness audit and file templates: robots.txt for AI bots, llms.txt, AGENTS.md, Content Signals, Markdown content negotiation, the MCP Server Card (SEP-2127), the AI Catalog / ARD, the API Catalog (RFC 9727), and how to promote an MCP server.
+- Also included: a smaller reference on making a site readable for AI agents in general (robots.txt for AI bots, llms.txt, AGENTS.md, Content Signals, Markdown content negotiation, MCP Server Card, AI Catalog, API Catalog).
