@@ -2,6 +2,10 @@
 
 The skill is updated every week. Each entry matches a [GitHub release](https://github.com/Pacamaraprogress/agent-ready/releases), whose `agent-ready.zip` is the file to upload to claude.ai or Claude Desktop.
 
+## 2026.11.24-2
+
+- The build guide's source list now starts with the two official WebMCP sources it was missing: the [specification](https://webmachinelearning.github.io/webmcp/) and the [official polyfill repo](https://github.com/w3c-oss/webmcp-polyfill) (`@w3c/webmcp-polyfill` 0.2.0, for test pages only).
+
 ## 2026.11.24
 
 First public release.

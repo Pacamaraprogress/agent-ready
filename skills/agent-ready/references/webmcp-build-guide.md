@@ -319,6 +319,8 @@ Lessons about the tests themselves:
 
 ## Sources
 
+- [WebMCP specification](https://webmachinelearning.github.io/webmcp/): Draft Community Group Report, W3C Web Machine Learning Community Group
+- [w3c-oss/webmcp-polyfill](https://github.com/w3c-oss/webmcp-polyfill): the official polyfill, `@w3c/webmcp-polyfill` (0.2.0). For test pages only, never on a live site.
 - [Chrome WebMCP documentation](https://developer.chrome.com/docs/ai/webmcp)
 - [Chrome: WebMCP tool security (size guidance)](https://developer.chrome.com/docs/ai/webmcp/secure-tools)
 - [GoogleChromeLabs/webmcp-extension](https://github.com/GoogleChromeLabs/webmcp-extension)
