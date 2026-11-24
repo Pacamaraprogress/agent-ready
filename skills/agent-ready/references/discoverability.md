@@ -46,7 +46,7 @@ Sitemap: https://example.com/sitemap.xml
 # ai-train: allow with attribution
 # ai-input: allow
 # search: allow
-Content-Signal: ai-train=y; ai-input=y; search=y
+Content-Signal: ai-train=yes, search=yes, ai-input=yes
 ```
 
 ### Deny-training-allow-search template
@@ -77,7 +77,7 @@ Disallow: /
 
 Sitemap: https://example.com/sitemap.xml
 
-Content-Signal: ai-train=n; ai-input=y; search=y
+Content-Signal: ai-train=no, search=yes, ai-input=yes
 ```
 
 ## sitemap.xml

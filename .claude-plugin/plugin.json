@@ -1,7 +1,7 @@
 {
   "name": "agent-ready",
-  "version": "2026.11.24-2",
-  "description": "Build WebMCP tools for websites: plan, design, build, secure, measure, test and ship in-page tools for browser agents. Field notes from seven real builds, updated weekly.",
+  "version": "2026.11.25",
+  "description": "Build WebMCP tools for websites: plan, design, build, secure, measure, test and ship in-page tools for browser agents. Field notes from seven real builds.",
   "author": {
     "name": "Omer Evrey",
     "url": "https://github.com/Pacamaraprogress"

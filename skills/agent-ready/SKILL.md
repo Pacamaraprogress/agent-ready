@@ -1,6 +1,6 @@
 ---
 name: agent-ready
-description: Make a website, docs site, or repo ready for AI agents (Agentic Engine Optimization / AEO). Use this skill whenever the user asks to audit, author, or understand agent-readiness — including robots.txt for AI bots, llms.txt, AGENTS.md, MCP Server Cards, AI Catalog / ARD files, promoting or listing an MCP server (connector links for Claude and ChatGPT, MCP Registry), WebMCP tools (building, reviewing, testing or shipping in-page tools for browser agents, including WordPress plugins), Markdown content negotiation, Web Bot Auth, Cloudflare Agent Readiness Score, or "how do I make my site work with Claude Code / Cursor / GPT agents". Trigger even when the user uses adjacent phrases like "optimize docs for AI", "LLM-friendly site", "agent SEO", "AEO", or asks about specific files like skill.md, api-catalog, or content signals. Not for human-SEO tasks — use a general SEO skill for those.
+description: Build, review, test and ship WebMCP tools (in-page tools for browser agents), and make a website, docs site, or repo ready for AI agents (Agentic Engine Optimization / AEO). Use this skill whenever the user asks to audit, author, or understand agent-readiness — including robots.txt for AI bots, llms.txt, AGENTS.md, MCP Server Cards, AI Catalog / ARD files, promoting or listing an MCP server (connector links for Claude and ChatGPT, MCP Registry), WebMCP tools (building, reviewing, testing or shipping in-page tools for browser agents, including WordPress plugins), Markdown content negotiation, Web Bot Auth, Cloudflare Agent Readiness Score, or "how do I make my site work with Claude Code / Cursor / GPT agents". Trigger even when the user uses adjacent phrases like "optimize docs for AI", "LLM-friendly site", "agent SEO", "AEO", or asks about specific files like skill.md, api-catalog, or content signals. Not for human-SEO tasks — use a general SEO skill for those.
 ---
 
 # agent-ready
@@ -40,7 +40,19 @@ The growth curve is steep. Publishing llms.txt, adding Content Signals, and supp
 
 ## Modes
 
-This skill has three modes. Pick based on what the user is asking:
+This skill has four modes. Pick based on what the user is asking. WebMCP comes first because it is what this skill is mainly for.
+
+### 0. WEBMCP — "build / review / test / ship WebMCP tools"
+
+When the user wants in-page tools for browser agents on a site: plan them, build them (WordPress plugin, theme code or a JavaScript bundle), review an existing build, test it, measure tool use or ship a release. Signals: "WebMCP", "modelContext", "registerTool", "tools for the browser agent", "origin trial token", "agent can fill the form".
+
+Approach:
+1. **Read `references/webmcp-build-guide.md` first**, every time. It holds the design rules, the WordPress traps, the security pass, the testing ladder and the release checklist.
+2. Plan from visitor journeys (find a location, product details, start a request), read-only tools first. A tool never submits a form for the visitor.
+3. Build, then run the testing ladder in the guide before anything goes on a live site. Never ship the polyfill on a live site.
+4. Say plainly what WebMCP does not do: it does not change search rankings, and it works only in Chromium-based browsers and the clients on the spec's implementation status page.
+5. Check the spec's implementation status page before quoting any browser version or date; the API is still changing.
+
 
 ### 1. AUDIT — "check my site"
 

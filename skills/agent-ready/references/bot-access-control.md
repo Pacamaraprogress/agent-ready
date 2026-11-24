@@ -16,7 +16,7 @@ How to express what agents may do with your content, and how to verify agents ar
 | `ai-input` | Content may be used as context in a live AI response (RAG, grounding) |
 | `search` | Content may be indexed for search (including AI search) |
 
-**Values:** `y` (yes, allowed) or `n` (no, denied).
+**Values:** `yes` (allowed) or `no` (denied). Separate the signals with commas, for example `Content-Signal: ai-train=no, search=yes, ai-input=no` ([contentsignals.org](https://contentsignals.org/)).
 
 **Placement:** Served as a directive in `robots.txt`, either scoped to a user agent or applied site-wide.
 
@@ -26,25 +26,25 @@ How to express what agents may do with your content, and how to verify agents ar
 ```
 User-agent: *
 Allow: /
-Content-Signal: ai-train=y; ai-input=y; search=y
+Content-Signal: ai-train=yes, search=yes, ai-input=yes
 ```
 
 **Allow search and grounding, deny training:**
 ```
 User-agent: *
 Allow: /
-Content-Signal: ai-train=n; ai-input=y; search=y
+Content-Signal: ai-train=no, search=yes, ai-input=yes
 ```
 
 **Per-bot overrides:**
 ```
 User-agent: GPTBot
 Disallow: /
-Content-Signal: ai-train=n
+Content-Signal: ai-train=no
 
 User-agent: ClaudeBot
 Allow: /
-Content-Signal: ai-train=y; ai-input=y
+Content-Signal: ai-train=yes, ai-input=yes
 ```
 
 ### Current adoption

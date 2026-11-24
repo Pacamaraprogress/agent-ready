@@ -1,6 +1,31 @@
 # Changelog
 
-The skill is updated every week. Each entry matches a [GitHub release](https://github.com/Pacamaraprogress/agent-ready/releases), whose `agent-ready.zip` is the file to upload to claude.ai or Claude Desktop.
+Weekly updates are planned. Each entry matches a [GitHub release](https://github.com/Pacamaraprogress/agent-ready/releases), whose `agent-ready.zip` is the file to upload to claude.ai or Claude Desktop.
+
+## 2026.11.25
+
+Fixes from an independent review. Factual corrections were checked against their sources; the wording changes are judgement calls.
+
+- Correction to the 2026.11.24 notes below: the Chrome 160 `Tool` interface is *expected* to reach Stable on 5 January 2027, not certain.
+
+- `assets/templates/robots.txt`: the named AI-bot groups are gone. Each had its own `Allow: /`, and a crawler uses only the group that names it (RFC 9309), so those bots skipped the blocked paths. The comments now explain the rule and show how to opt a bot out or give it its own group safely.
+- Content Signals now use the official syntax, `yes`/`no` separated by commas (`ai-train=no, search=yes, ai-input=no`), in the template, `bot-access-control.md` and `discoverability.md`.
+- Build guide:
+  - Continuations need the same **origin**, not only the same site.
+  - Local testing uses `chrome://flags/#enable-webmcp-testing` (Chrome docs); `--enable-features=WebMCP` stays for automated tests.
+  - The Chrome 160 `Tool` interface is "expected" in Stable on 5 January 2027.
+  - The Brave Leo line links spec PR #383 and no longer says "first".
+  - `document.modelContext` is the only entry point the spec defines.
+  - Tool hints are signals, not guarantees.
+  - Each manual redirect hop goes through `wp_safe_remote_get` again.
+  - Some examples are more generic: no brand or hosting names, no exact plugin versions or speed scores, and one example uses neutral numbers.
+- README:
+  - ChatGPT Desktop and Meta Ray-Ban Display rows from the implementation status page.
+  - Testing flag and Chrome 160 wording.
+  - "Weekly updates planned".
+- Dead links replaced: OpenAI Codex AGENTS.md, the Linux Foundation AAIF press release, the Cursor rules page. The MCP Server Card `$schema` line is removed from the template and the example until the official schema address is live.
+- `SKILL.md`: a WebMCP mode comes first, and the description leads with WebMCP.
+- Version numbers no longer use a hyphen suffix (a suffix reads as a pre-release in semver).
 
 ## 2026.11.24-2
 

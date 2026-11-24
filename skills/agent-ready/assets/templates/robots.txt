@@ -2,9 +2,10 @@
 # Default stance: allow AI bots with declared intent via Content Signals.
 # Adjust the Content-Signal values if you want to restrict training.
 #
-# Values for each signal:
-#   y = allowed
-#   n = not allowed
+# Values for each signal (contentsignals.org):
+#   yes = allowed
+#   no  = not allowed
+# Separate the signals with commas.
 
 User-agent: *
 # Block typical non-content paths — customize for your stack.
@@ -21,48 +22,29 @@ Allow: /
 # ai-train:  may this content be used to train AI models?
 # ai-input:  may this content be used as context in a live AI response (RAG)?
 # search:    may this content be indexed for search, including AI search?
-Content-Signal: ai-train=y; ai-input=y; search=y
+Content-Signal: ai-train=yes, search=yes, ai-input=yes
 
-# Named AI bots (for transparency — these follow the * rules above unless overridden).
-# Override any of these blocks with Disallow: / to opt out per-bot.
-
-User-agent: GPTBot
-Allow: /
-
-User-agent: OAI-SearchBot
-Allow: /
-
-User-agent: ChatGPT-User
-Allow: /
-
-User-agent: ClaudeBot
-Allow: /
-
-User-agent: Claude-Web
-Allow: /
-
-User-agent: Claude-SearchBot
-Allow: /
-
-User-agent: PerplexityBot
-Allow: /
-
-User-agent: Perplexity-User
-Allow: /
-
-User-agent: Google-Extended
-Allow: /
-
-User-agent: Applebot-Extended
-Allow: /
-
-User-agent: Meta-ExternalAgent
-Allow: /
-
-User-agent: Bytespider
-Allow: /
-
-User-agent: CCBot
-Allow: /
+# Named AI bots (GPTBot, OAI-SearchBot, ChatGPT-User, ClaudeBot, Claude-SearchBot,
+# PerplexityBot, Perplexity-User, Google-Extended, Applebot-Extended,
+# Meta-ExternalAgent, Bytespider, CCBot) follow the * group above as long as
+# they have no group of their own.
+#
+# Careful: a crawler uses ONLY the most specific group that names it (RFC 9309).
+# If you add a group for a bot, it ignores the * group entirely, so repeat every
+# Disallow line in it. Example: opt one bot out completely:
+#
+# User-agent: GPTBot
+# Disallow: /
+#
+# Example: give one bot its own group but keep the same blocked paths:
+#
+# User-agent: ClaudeBot
+# Disallow: /admin/
+# Disallow: /checkout/
+# Disallow: /cart/
+# Disallow: /my-account/
+# Disallow: /wp-admin/
+# Allow: /wp-admin/admin-ajax.php
+# Allow: /
 
 Sitemap: https://example.com/sitemap.xml

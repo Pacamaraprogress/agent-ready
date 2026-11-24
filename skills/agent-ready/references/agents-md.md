@@ -91,7 +91,7 @@ The Linux Foundation / Agentic AI Foundation backing makes AGENTS.md distinct fr
 
 ## Sources
 
-- [Agentic AI Foundation (Linux Foundation)](https://www.linuxfoundation.org/press/linux-foundation-announces-agentic-ai-foundation)
+- [Agentic AI Foundation (Linux Foundation)](https://www.linuxfoundation.org/press/linux-foundation-announces-the-formation-of-the-agentic-ai-foundation)
 - [AGENTS.md specification](https://agents.md/) (community-maintained)
-- [OpenAI Codex — AGENTS.md support](https://help.openai.com/en/articles/codex-agents-md)
-- [Cursor — custom instructions](https://docs.cursor.com/context/rules)
+- [OpenAI Codex — AGENTS.md support](https://learn.chatgpt.com/docs/agent-configuration/agents-md)
+- [Cursor — custom instructions](https://cursor.com/docs/rules)

@@ -1,6 +1,6 @@
 # agent-ready: a Claude skill for building WebMCP tools
 
-A free Claude skill for **building WebMCP tools for websites**, whether the site is yours or a client's. It runs in claude.ai, Claude Desktop and Claude Code. MIT licensed, **updated every week**.
+A free Claude skill for **building WebMCP tools for websites**, whether the site is yours or a client's. It runs in claude.ai, Claude Desktop and Claude Code. MIT licensed, with **weekly updates planned**.
 
 **[Download the latest zip](https://github.com/Pacamaraprogress/agent-ready/releases/latest/download/agent-ready.zip)** · [Releases](https://github.com/Pacamaraprogress/agent-ready/releases) · [Changelog](CHANGELOG.md) · [Türkçe](#türkçe)
 
@@ -8,7 +8,7 @@ A free Claude skill for **building WebMCP tools for websites**, whether the site
 
 WebMCP lets a web page give the AI agent in a visitor's browser a set of tools. Examples: "find the nearest location", "what are this product's dimensions", "fill in the quote form for me". The agent then answers from the site's own content and lands on the right page or form, instead of guessing from a screenshot. The [specification](https://webmachinelearning.github.io/webmcp/) is a draft of the W3C Web Machine Learning Community Group. Chrome runs it as an origin trial today.
 
-This skill holds field notes from seven real WebMCP builds made in October and November 2026: six for WordPress and one for Next.js, four of them running on live sites. With it, Claude can plan, build, review, test and ship WebMCP tools for any site you work on.
+This skill holds field notes from seven real WebMCP builds made in October and November 2026: six for WordPress and one for Next.js, four of them running on live sites. With it, Claude can plan, build, review, test and ship WebMCP tools for any site you work on (most of the notes come from WordPress builds).
 
 ## What the skill covers
 
@@ -21,20 +21,22 @@ The heart of the skill is the build guide, [`webmcp-build-guide.md`](skills/agen
 - **Measure:** counting tool use in GA4 through Tag Manager.
 - **Ship:** the origin-trial token, a testing ladder, a release checklist, page speed, and how to work with the site owner.
 
-## Browsers (checked November 2026)
+## Browsers and agents (checked November 2026)
 
-WebMCP works only in Chromium-based browsers for now.
+In browsers, WebMCP works only in Chromium-based ones for now. The official implementation status page also lists two clients outside the browser (last two rows).
 
 | Browser | Engine | WebMCP status |
 | --- | --- | --- |
-| Google Chrome | Chromium | Origin trial (Chrome 149 to 162). Without a trial token on the page, only a browser started with the `--enable-features=WebMCP` flag sees the tools. The new `Tool` interface reaches Stable with Chrome 160 on 5 January 2027. |
+| Google Chrome | Chromium | Origin trial (Chrome 149 to 162). Without a trial token on the page, turn on `chrome://flags/#enable-webmcp-testing` to see the tools (for automated tests, start Chrome with `--enable-features=WebMCP`). The new `Tool` interface is expected to reach Stable with Chrome 160 on 5 January 2027. |
 | Microsoft Edge | Chromium | Edge's own origin trial (Edge 150) with its own token. In tests it also honoured a valid Chrome token. |
-| Brave | Chromium | Behind the flag; in tests it honoured a valid Chrome token. Brave's assistant **Leo** is expected to use a site's tools by default from Brave 1.102.2 (expected 5 January 2027). That makes it the first browser assistant to call a site's tools with no test flag on the visitor's side. |
+| Brave | Chromium | Behind the flag; in tests it honoured a valid Chrome token. Brave's assistant **Leo** is expected to use a site's tools by default from Brave 1.102.2 (expected 5 January 2027; [spec PR #383](https://github.com/webmachinelearning/webmcp/pull/383)), with no test flag on the visitor's side. |
 | Opera, Vivaldi and other Chromium-based browsers | Chromium | Same engine, but **not tested**. Don't promise them to a client until you have tried them. |
 | Safari | WebKit | Not supported. WebKit's standards position is "oppose". |
 | Firefox | Gecko | Not supported. Mozilla's standards position is "neutral". |
+| ChatGPT Desktop | Not a browser | Listed as supported on the implementation status page. Not tested with the reference builds. |
+| Meta Ray-Ban Display | Not a browser | Listed as "coming soon" for Web Apps, off by default (Developer Mode or rollout). |
 
-The API is still changing, so check the [implementation status page](https://github.com/webmachinelearning/webmcp/blob/main/implementation-status.md) before you quote a version. Keeping up with these changes is the reason for the weekly updates.
+The API is still changing, so check the [implementation status page](https://github.com/webmachinelearning/webmcp/blob/main/implementation-status.md) before you quote a version. Keeping up with these changes is the reason for the planned weekly updates.
 
 ## Install
 
@@ -46,14 +48,14 @@ The API is still changing, so check the [implementation status page](https://git
 
 To update, download the zip again from the same link and upload it again. The link always points to the latest release.
 
-### Claude Code: as a plugin (recommended, easy weekly updates)
+### Claude Code: as a plugin (recommended, easy updates)
 
 ```
 /plugin marketplace add Pacamaraprogress/agent-ready
 /plugin install agent-ready@agent-ready
 ```
 
-To get the weekly update:
+To get the latest update:
 
 ```
 /plugin marketplace update agent-ready
@@ -106,7 +108,7 @@ The skill also carries a smaller reference on making a site readable for AI agen
 
 ## Updates
 
-The skill is updated every week with what new builds and spec changes teach. Each update is a [GitHub release](https://github.com/Pacamaraprogress/agent-ready/releases) with notes, and [CHANGELOG.md](CHANGELOG.md) lists them all. To get notified, click **Watch → Custom → Releases** on this repo.
+The plan is to update the skill every week with what new builds and spec changes teach. Each update is a [GitHub release](https://github.com/Pacamaraprogress/agent-ready/releases) with notes, and [CHANGELOG.md](CHANGELOG.md) lists them all. To get notified, click **Watch → Custom → Releases** on this repo.
 
 ## Feedback
 
@@ -133,19 +135,20 @@ Tried it on your own site? Please [open an issue](https://github.com/Pacamarapro
 
 ## Türkçe
 
-**agent-ready**, web sitelerine (kendi sitenize ya da müşterilerinizin sitelerine) **WebMCP araçları kurmak** için ücretsiz bir Claude skill'i. claude.ai, Claude Desktop ve Claude Code'da çalışır. MIT lisanslıdır, herkes kullanabilir. **Her hafta güncellenir.**
+**agent-ready**, web sitelerine (kendi sitenize ya da müşterilerinizin sitelerine) **WebMCP araçları kurmak** için ücretsiz bir Claude skill'i. claude.ai, Claude Desktop ve Claude Code'da çalışır. MIT lisanslıdır, herkes kullanabilir. **Haftalık güncelleme planlanıyor.**
 
 WebMCP, sitenin ziyaretçinin tarayıcısındaki yapay zeka ajanına kendi araçlarını sunmasını sağlar. Örneğin "en yakın şube hangisi", "bu ürünün ölçüleri ne" ya da "teklif formunu doldur". Ajan tahmin etmek yerine sitenin kendi içeriğinden cevap verir. Skill'in içinde canlı sitelerde yapılmış WebMCP kurulumlarından çıkan notlar var: araç tasarım kuralları, WordPress tuzakları, güvenlik kontrolü, GA4'te ölçüm, test merdiveni ve sürüm kontrol listesi.
 
 **Hangi tarayıcılarda çalışıyor (Kasım 2026):** Yalnızca Chromium tabanlı tarayıcılarda.
-- **Google Chrome:** Origin trial (Chrome 149–162). Sayfada token yoksa araçları yalnızca `--enable-features=WebMCP` ile açılan tarayıcı görür.
+- **Google Chrome:** Origin trial (Chrome 149–162). Sayfada token yoksa araçları görmek için `chrome://flags/#enable-webmcp-testing` ayarını açın (otomatik testlerde Chrome'u `--enable-features=WebMCP` ile başlatın).
 - **Microsoft Edge:** Kendi origin trial'ı (Edge 150) ve kendi token'ı var. Testlerde geçerli bir Chrome token'ını da kabul etti.
 - **Brave:** Bayrakla açılıyor. Brave'in asistanı **Leo**, Brave 1.102.2 ile (5 Ocak 2027 bekleniyor) sitenin araçlarını varsayılan olarak kullanmaya başlayacak.
 - **Opera, Vivaldi ve diğer Chromium tabanlı tarayıcılar:** Motor aynı ama test edilmedi. Denemeden müşteriye söz vermeyin.
 - **Safari ve Firefox:** Desteklemiyor.
+- **Tarayıcı dışı:** Resmi durum sayfasına göre ChatGPT Desktop destekliyor; Meta Ray-Ban Display için destek "yakında".
 
 **Kurulum:**
 - **claude.ai / Claude Desktop:** [agent-ready.zip](https://github.com/Pacamaraprogress/agent-ready/releases/latest/download/agent-ready.zip) dosyasını indirin. Zip'i açmadan **Özelleştir → Skills → + → Skill yükle** adımıyla yükleyin. Ayarlar'da kod çalıştırma açık olmalı. Güncellemek için aynı bağlantıdan yeniden indirip yeniden yükleyin.
-- **Claude Code:** `/plugin marketplace add Pacamaraprogress/agent-ready`, ardından `/plugin install agent-ready@agent-ready` yazın. Haftalık güncelleme için `/plugin marketplace update agent-ready` ve `/plugin update agent-ready@agent-ready` yazın.
+- **Claude Code:** `/plugin marketplace add Pacamaraprogress/agent-ready`, ardından `/plugin install agent-ready@agent-ready` yazın. Güncelleme için `/plugin marketplace update agent-ready` ve `/plugin update agent-ready@agent-ready` yazın.
 
 Dosyalar İngilizce, ama Claude'a Türkçe yazarsanız Türkçe cevap verir. WebMCP araçları Google sıralamasını değiştirmez. Resmi kaynaklar yukarıdaki "Official WebMCP sources" bölümünde. Geri bildiriminizi [Issues](https://github.com/Pacamaraprogress/agent-ready/issues) bölümüne yazabilirsiniz.

@@ -11,8 +11,8 @@
     {
       "name": "agent-ready",
       "source": "./",
-      "version": "2026.11.24-2",
-      "description": "Build WebMCP tools for websites: plan, design, build, secure, measure, test and ship in-page tools for browser agents. Field notes from seven real builds, updated weekly.",
+      "version": "2026.11.25",
+      "description": "Build WebMCP tools for websites: plan, design, build, secure, measure, test and ship in-page tools for browser agents. Field notes from seven real builds.",
       "license": "MIT",
       "keywords": [
         "webmcp",

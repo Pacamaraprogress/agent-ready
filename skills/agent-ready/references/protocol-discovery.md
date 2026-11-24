@@ -96,7 +96,6 @@ It is **not** a `.well-known` file. Older drafts and many guides still say `/.we
 
 ```json
 {
-  "$schema": "https://static.modelcontextprotocol.io/schemas/v1/server-card.schema.json",
   "name": "com.example/catalog",
   "version": "1.0.0",
   "title": "Example Catalog",
