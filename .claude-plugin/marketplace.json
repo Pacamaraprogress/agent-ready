@@ -1,0 +1,20 @@
+{
+  "name": "agent-ready",
+  "owner": {
+    "name": "Omer Evrey",
+    "url": "https://github.com/Pacamaraprogress"
+  },
+  "metadata": {
+    "description": "The agent-ready skill: build WebMCP tools and make websites ready for AI agents."
+  },
+  "plugins": [
+    {
+      "name": "agent-ready",
+      "source": "./",
+      "version": "2026.11.24",
+      "description": "Build WebMCP tools for websites and make sites agent-ready: robots.txt for AI bots, llms.txt, AGENTS.md, Content Signals, Markdown negotiation, MCP Server Cards. Field notes from live WebMCP builds, updated weekly.",
+      "license": "MIT",
+      "keywords": ["webmcp", "agent-ready", "aeo", "llms-txt", "agents-md", "mcp", "seo", "wordpress"]
+    }
+  ]
+}

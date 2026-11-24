@@ -1,0 +1,33 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://example.com",
+      "service-desc": [
+        {
+          "href": "https://example.com/openapi.yaml",
+          "type": "application/openapi+yaml"
+        },
+        {
+          "href": "https://example.com/openapi.json",
+          "type": "application/openapi+json"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://example.com/docs/api",
+          "type": "text/html"
+        },
+        {
+          "href": "https://example.com/docs/api.md",
+          "type": "text/markdown"
+        }
+      ],
+      "service-meta": [
+        {
+          "href": "https://example.com/.well-known/oauth-authorization-server",
+          "type": "application/json"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+# robots.txt — agent-ready template
+# Default stance: allow AI bots with declared intent via Content Signals.
+# Adjust the Content-Signal values if you want to restrict training.
+#
+# Values for each signal:
+#   y = allowed
+#   n = not allowed
+
+User-agent: *
+# Block typical non-content paths — customize for your stack.
+Disallow: /admin/
+Disallow: /checkout/
+Disallow: /cart/
+Disallow: /my-account/
+Disallow: /wp-admin/
+Allow: /wp-admin/admin-ajax.php
+
+Allow: /
+
+# Content Signals — contentsignals.org
+# ai-train:  may this content be used to train AI models?
+# ai-input:  may this content be used as context in a live AI response (RAG)?
+# search:    may this content be indexed for search, including AI search?
+Content-Signal: ai-train=y; ai-input=y; search=y
+
+# Named AI bots (for transparency — these follow the * rules above unless overridden).
+# Override any of these blocks with Disallow: / to opt out per-bot.
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+Sitemap: https://example.com/sitemap.xml

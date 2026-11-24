@@ -1,0 +1,57 @@
+{
+  "version": "1.0",
+  "site": {
+    "name": "Example Corp",
+    "url": "https://example.com",
+    "description": "What this site offers agents."
+  },
+  "skills": [
+    {
+      "id": "check-order-status",
+      "name": "Check Order Status",
+      "description": "Look up the current status of a customer order given an order number.",
+      "endpoint": "https://example.com/api/orders/{order_id}",
+      "method": "GET",
+      "auth": "oauth2",
+      "documentation": "https://example.com/docs/api/orders.md",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "order_id": {
+            "type": "string",
+            "description": "Order ID, format: ORD-XXXXX"
+          }
+        },
+        "required": ["order_id"]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "enum": ["pending", "processing", "shipped", "delivered", "cancelled"]},
+          "tracking_url": {"type": "string", "format": "uri"},
+          "estimated_delivery": {"type": "string", "format": "date"}
+        }
+      }
+    },
+    {
+      "id": "request-consultation",
+      "name": "Request a Consultation",
+      "description": "Book a free consultation for a customer at a nearby showroom.",
+      "endpoint": "https://example.com/api/consultations",
+      "method": "POST",
+      "auth": "none",
+      "documentation": "https://example.com/docs/api/consultations.md",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string"},
+          "email": {"type": "string", "format": "email"},
+          "phone": {"type": "string"},
+          "zip_code": {"type": "string", "description": "5-digit US ZIP for showroom matching"},
+          "project_type": {"type": "string", "enum": ["kitchen", "bathroom", "both"]}
+        },
+        "required": ["name", "email", "zip_code", "project_type"]
+      }
+    }
+  ]
+}

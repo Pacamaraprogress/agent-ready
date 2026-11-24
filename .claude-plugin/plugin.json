@@ -1,0 +1,13 @@
+{
+  "name": "agent-ready",
+  "version": "2026.11.24",
+  "description": "Build WebMCP tools for websites and make sites agent-ready: robots.txt for AI bots, llms.txt, AGENTS.md, Content Signals, Markdown negotiation, MCP Server Cards. Field notes from live WebMCP builds, updated weekly.",
+  "author": {
+    "name": "Omer Evrey",
+    "url": "https://github.com/Pacamaraprogress"
+  },
+  "homepage": "https://github.com/Pacamaraprogress/agent-ready",
+  "repository": "https://github.com/Pacamaraprogress/agent-ready",
+  "license": "MIT",
+  "keywords": ["webmcp", "agent-ready", "aeo", "llms-txt", "agents-md", "mcp", "seo", "wordpress"]
+}
