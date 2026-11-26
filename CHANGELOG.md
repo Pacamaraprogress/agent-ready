@@ -2,6 +2,11 @@
 
 Weekly updates are planned. Each entry matches a [GitHub release](https://github.com/Pacamaraprogress/agent-ready/releases), whose `agent-ready.zip` is the file to upload to claude.ai or Claude Desktop.
 
+## 2026.11.27
+
+- Build guide, section 7: how to get the origin-trial tokens. Links to the Chrome and Edge WebMCP trial registration pages, the sign-in each asks for (Google account for Chrome, GitHub for Edge), the `origin-trial` meta tag and the `Origin-Trial` response header, and how Chrome renewals work. Edge's trial page lists 29 March 2027 as its expiry date. Checked against Chrome's and Microsoft's own pages on 26 Nov 2026; the three pages are now in Sources.
+- SKILL.md: the section 7 row now says it covers getting the tokens.
+
 ## 2026.11.26
 
 The skill is now about WebMCP only.

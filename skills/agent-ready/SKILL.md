@@ -19,7 +19,7 @@ Everything practical lives in `references/webmcp-build-guide.md`: field notes fr
 | route high-intent questions (guides, warranty, returns, price-list requests) to the right page | 4. Topic map |
 | keep the page fast | 5. Page speed |
 | get changes seen through page caches with wp-admin access only | 6. Caching |
-| set up the origin-trial token | 7. Origin-trial token |
+| get the origin-trial tokens (Chrome, Edge) and put them on the site | 7. Origin-trial token |
 | test before anything goes live | 8. Testing ladder |
 | ship a release or re-check an older build | 9. Release checklist |
 | explain the work to the site owner | 10. Working with the site owner |

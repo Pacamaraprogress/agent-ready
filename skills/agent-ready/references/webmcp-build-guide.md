@@ -219,6 +219,15 @@ Plan so nothing ever needs a CDN purge.
 
 ## 7. Origin-trial token
 
+The trial needs no API key. Each browser's trial issues a token for one origin, and the page hands that token to the browser; without it, Chrome and Edge expose the tools only where the test flag is on. Chrome and Edge run separate trials with separate tokens. Getting them (checked 26 Nov 2026):
+
+1. **Chrome:** open the [WebMCP trial registration page](https://developer.chrome.com/origintrials/#/register_trial/4163014905550602241) (or find WebMCP under [Active Trials](https://developer.chrome.com/origintrials/#/trials/active) and click Register), sign in with a Google account and enter the origin. Chrome's guide says origin trials "are public and open to all developers".
+2. **Edge:** open the [Microsoft Edge WebMCP trial](https://developer.microsoft.com/microsoft-edge/origin-trials/trials/0b76fe60-b266-458e-a285-04e375c0c31a), sign in with GitHub and enter the domain. That page lists 29 March 2027 as the trial's expiry date.
+3. **Put each token on every page that registers tools:** `<meta http-equiv="origin-trial" content="TOKEN">` in the `<head>`, or an `Origin-Trial: TOKEN` response header. Both browsers document both ways.
+4. **Renew:** Chrome emails a renewal link when a token expires, and when a trial is extended it asks for a new token for each origin (My Registrations, Renew, then copy the new token onto every page). Chrome ignores invalid or expired tokens, so after expiry the tools are gone for visitors: track the expiry date (see below).
+
+Rules from the builds:
+
 - Register the exact origin the site serves (`https://www.example.com`), subdomain matching on if needed.
 - **Do not tick "third-party matching".** A third-party token in a plain meta tag is rejected with status `WrongOrigin`.
 - Give the settings field one token per line and print one meta tag each (Chrome and Edge trials have separate tokens).
@@ -324,6 +333,9 @@ Lessons about the tests themselves:
 - [w3c-oss/webmcp-polyfill](https://github.com/w3c-oss/webmcp-polyfill): the official polyfill, `@w3c/webmcp-polyfill` (0.2.0). For test pages only, never on a live site.
 - [Chrome WebMCP documentation](https://developer.chrome.com/docs/ai/webmcp)
 - [Chrome: WebMCP tool security (size guidance)](https://developer.chrome.com/docs/ai/webmcp/secure-tools)
+- [Chrome: Get started with origin trials](https://developer.chrome.com/docs/web-platform/origin-trials): registration, the meta tag and header, renewal
+- [Chrome: Join the WebMCP origin trial](https://developer.chrome.com/blog/ai-webmcp-origin-trial) (9 Jun 2026)
+- [Microsoft Edge WebMCP origin trial](https://developer.microsoft.com/microsoft-edge/origin-trials/trials/0b76fe60-b266-458e-a285-04e375c0c31a)
 - [GoogleChromeLabs/webmcp-extension](https://github.com/GoogleChromeLabs/webmcp-extension)
 - [webmachinelearning/webmcp](https://github.com/webmachinelearning/webmcp)
 - [WebMCP implementation status (browsers and assistants)](https://github.com/webmachinelearning/webmcp/blob/main/implementation-status.md)
