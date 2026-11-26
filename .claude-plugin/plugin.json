@@ -1,6 +1,6 @@
 {
   "name": "agent-ready",
-  "version": "2026.11.25",
+  "version": "2026.11.26",
   "description": "Build WebMCP tools for websites: plan, design, build, secure, measure, test and ship in-page tools for browser agents. Field notes from seven real builds.",
   "author": {
     "name": "Omer Evrey",
@@ -15,7 +15,6 @@
     "ai-agents",
     "mcp",
     "wordpress",
-    "chrome",
-    "seo"
+    "chrome"
   ]
 }

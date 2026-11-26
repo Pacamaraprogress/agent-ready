@@ -93,18 +93,11 @@ You don't need to name the skill; Claude picks it up from requests like these:
 ```
 skills/agent-ready/
 ├── SKILL.md                         how Claude uses the skill
-├── references/
-│   ├── webmcp-build-guide.md        the WebMCP field notes (start here)
-│   ├── protocol-discovery.md        WebMCP in context: MCP Server Cards, AI Catalog, API Catalog
-│   ├── content-accessibility.md     Markdown negotiation, llms.txt
-│   ├── bot-access-control.md        Content Signals, Web Bot Auth
-│   ├── discoverability.md           robots.txt for AI bots, sitemaps
-│   ├── agents-md.md                 AGENTS.md
-│   └── adoption-stats.md            adoption numbers with dates and sources
-└── assets/                          an audit checklist and file templates
+└── references/
+    └── webmcp-build-guide.md        the WebMCP field notes
 ```
 
-The skill also carries a smaller reference on making a site readable for AI agents in general (the files under `references/` other than the build guide). Claude uses it when you ask for that, but WebMCP is what this project is about.
+Making a site readable for AI agents in general (robots.txt for AI bots, Content Signals, llms.txt, Markdown for agents, MCP Server Cards, a Cloudflare Agent Readiness audit) is a different job, with its own skill: **[agent-readiness](https://github.com/Pacamaraprogress/agent-readiness)**. Until release 2026.11.26 a smaller version of that material sat in this repo.
 
 ## Updates
 
@@ -150,5 +143,7 @@ WebMCP, sitenin ziyaretçinin tarayıcısındaki yapay zeka ajanına kendi araç
 **Kurulum:**
 - **claude.ai / Claude Desktop:** [agent-ready.zip](https://github.com/Pacamaraprogress/agent-ready/releases/latest/download/agent-ready.zip) dosyasını indirin. Zip'i açmadan **Özelleştir → Skills → + → Skill yükle** adımıyla yükleyin. Ayarlar'da kod çalıştırma açık olmalı. Güncellemek için aynı bağlantıdan yeniden indirip yeniden yükleyin.
 - **Claude Code:** `/plugin marketplace add Pacamaraprogress/agent-ready`, ardından `/plugin install agent-ready@agent-ready` yazın. Güncelleme için `/plugin marketplace update agent-ready` ve `/plugin update agent-ready@agent-ready` yazın.
+
+Sitenin genel olarak yapay zeka ajanlarına hazır olması (AI botları için robots.txt, Content Signals, llms.txt, ajanlar için Markdown, MCP Server Card, Cloudflare Agent Readiness denetimi) ayrı bir iş ve ayrı bir skill'i var: [agent-readiness](https://github.com/Pacamaraprogress/agent-readiness).
 
 Dosyalar İngilizce, ama Claude'a Türkçe yazarsanız Türkçe cevap verir. WebMCP araçları Google sıralamasını değiştirmez. Resmi kaynaklar yukarıdaki "Official WebMCP sources" bölümünde. Geri bildiriminizi [Issues](https://github.com/Pacamaraprogress/agent-ready/issues) bölümüne yazabilirsiniz.

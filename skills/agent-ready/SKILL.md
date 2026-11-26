@@ -1,142 +1,62 @@
 ---
 name: agent-ready
-description: Build, review, test and ship WebMCP tools (in-page tools for browser agents), and make a website, docs site, or repo ready for AI agents (Agentic Engine Optimization / AEO). Use this skill whenever the user asks to audit, author, or understand agent-readiness — including robots.txt for AI bots, llms.txt, AGENTS.md, MCP Server Cards, AI Catalog / ARD files, promoting or listing an MCP server (connector links for Claude and ChatGPT, MCP Registry), WebMCP tools (building, reviewing, testing or shipping in-page tools for browser agents, including WordPress plugins), Markdown content negotiation, Web Bot Auth, Cloudflare Agent Readiness Score, or "how do I make my site work with Claude Code / Cursor / GPT agents". Trigger even when the user uses adjacent phrases like "optimize docs for AI", "LLM-friendly site", "agent SEO", "AEO", or asks about specific files like skill.md, api-catalog, or content signals. Not for human-SEO tasks — use a general SEO skill for those.
+description: Build, review, test and ship WebMCP tools, the in-page tools a website registers with document.modelContext so an AI agent in the visitor's browser (Chrome, Edge, Brave) can find a location, look up a product, get a price range or start a request on the site. Field notes from live WordPress and Next.js builds - tool design rules, the three tool hints, answers read from the site's own content, a security pass, caching, page speed, origin-trial tokens, GA4 tool-use events, a testing ladder and a release checklist. Use whenever the user mentions WebMCP, modelContext, registerTool, tools for browser agents, the WebMCP origin trial or polyfill, "Agentic browsing" in Lighthouse, or wants a WordPress plugin or JavaScript bundle that lets AI agents use the site. Not for robots.txt, llms.txt, MCP Server Cards or a general agent-readiness audit (use the agent-readiness skill).
 ---
 
 # agent-ready
 
-Helps users make a site, docs portal, or repo consumable by AI coding agents (Claude Code, Cursor, Cline, ChatGPT agents, etc.). The goal is standards-grounded, actionable output — cite primary sources and note adoption status so recommendations are grounded.
+Helps build WebMCP tools for a website: in-page tools that an AI agent running in the visitor's browser can call. The page registers them with `document.modelContext`; the agent finds them by opening the page. Typical tools answer what a visitor would otherwise click around for (a location, product details, a price range, the right form) and hand the visitor to the right page.
 
-## Core framing
+Everything practical lives in `references/webmcp-build-guide.md`: field notes from live builds, checked against the spec and Chrome's documentation. **Read it first, every time**, before planning, building, reviewing, testing or shipping tools. The API is still changing: the guide dates its version numbers and trial dates, so re-check them before quoting.
 
-The field has two overlapping names:
-- **AEO** — Agentic Engine Optimization (Addy Osmani, Apr 2026)
-- **Agent Readiness** — Cloudflare's taxonomy, backed by Radar telemetry
+## What to read for each request
 
-This skill uses **Cloudflare's 4-category taxonomy** as the spine because it maps to actual RFCs, and layers Addy's token-budget guidance on top because it's the most useful concrete guidance for docs sites.
+| The user wants to | Guide section |
+|---|---|
+| know whether WebMCP is worth it, which browsers run it, what changed lately | 1. Status and reach |
+| plan or design tools, write descriptions, set the tool hints, measure tool use in GA4 | 2. Tool design rules |
+| answer from the site's own pages (WordPress, page builders), check the knowledge route's security | 3. Where the answers come from |
+| route high-intent questions (guides, warranty, returns, price-list requests) to the right page | 4. Topic map |
+| keep the page fast | 5. Page speed |
+| get changes seen through page caches with wp-admin access only | 6. Caching |
+| set up the origin-trial token | 7. Origin-trial token |
+| test before anything goes live | 8. Testing ladder |
+| ship a release or re-check an older build | 9. Release checklist |
+| explain the work to the site owner | 10. Working with the site owner |
 
-The four categories:
+## How to work
 
-| Category | What agents need | Key standards |
-|---|---|---|
-| Discoverability | Find the content | robots.txt (RFC 9309), sitemap.xml, Link Headers (RFC 8288) |
-| Content Accessibility | Read it efficiently | Markdown content negotiation (`Accept: text/markdown`), llms.txt, token budgets |
-| Bot Access Control | Know what's allowed | Content Signals, Web Bot Auth (IETF draft), robots.txt AI rules |
-| Protocol Discovery | Call APIs / invoke skills | Agent Skills, API Catalog (RFC 9727), MCP Server Card, AI Catalog / ARD, OAuth (RFC 8414/9728), WebMCP |
+1. **Plan from visitor journeys.** Start with read-only tools: find a location, product details, a price range, which form to use. A tool never submits a form: a form tool opens the right page, fills the fields and stops, and the visitor sends it.
+2. **Build** as a WordPress plugin, theme code or a JavaScript bundle. Register in the top page only, once, and only when `document.modelContext` exists.
+3. **Run the testing ladder** in section 8 before anything goes on a live site. The official polyfill is for test pages only: never ship it on a live site.
+4. **Ship with the release checklist** in section 9, then confirm the live file is byte-identical to the build.
+5. **Say plainly what WebMCP does not do:** it does not change search rankings, and it works only in Chromium-based browsers and the assistants on the spec's implementation status page. Check that page before quoting a browser version or date.
 
-Plus one cross-cutting concern:
-- **AGENTS.md** — Linux Foundation spec (Agentic AI Foundation), backed by OpenAI, Google, Cursor, Amp, Aider. This has the strongest institutional backing in the space.
+## Browsers
 
-## Adoption snapshot (Apr 2026, Cloudflare Radar, top 200k sites)
+- Tested: Chrome, Edge and Brave, behind a flag or with an origin-trial token. Brave's assistant Leo is expected to use tools by default from Brave 1.102.2.
+- Not tested: Opera, Vivaldi.
+- Not supported: Safari (WebKit opposes) and Firefox (Mozilla is neutral).
 
-Calibrate recommendations with current adoption — but frame these as *opportunities*, not reasons to skip a standard. Most of these are low-effort, high-upside.
-
-- **78%** have robots.txt (most not yet tuned for AI agents)
-- **4%** have declared AI usage preferences (Content Signals)
-- **3.9%** support Markdown content negotiation (**highest-ROI change**)
-- **<15 sites** in the entire 200k have MCP Server Cards + API Catalogs — genuine first-mover territory
-
-The growth curve is steep. Publishing llms.txt, adding Content Signals, and supporting Markdown negotiation are easy wins today that position the site well as providers formalize support.
-
-## Modes
-
-This skill has four modes. Pick based on what the user is asking. WebMCP comes first because it is what this skill is mainly for.
-
-### 0. WEBMCP — "build / review / test / ship WebMCP tools"
-
-When the user wants in-page tools for browser agents on a site: plan them, build them (WordPress plugin, theme code or a JavaScript bundle), review an existing build, test it, measure tool use or ship a release. Signals: "WebMCP", "modelContext", "registerTool", "tools for the browser agent", "origin trial token", "agent can fill the form".
-
-Approach:
-1. **Read `references/webmcp-build-guide.md` first**, every time. It holds the design rules, the WordPress traps, the security pass, the testing ladder and the release checklist.
-2. Plan from visitor journeys (find a location, product details, start a request), read-only tools first. A tool never submits a form for the visitor.
-3. Build, then run the testing ladder in the guide before anything goes on a live site. Never ship the polyfill on a live site.
-4. Say plainly what WebMCP does not do: it does not change search rankings, and it works only in Chromium-based browsers and the clients on the spec's implementation status page.
-5. Check the spec's implementation status page before quoting any browser version or date; the API is still changing.
-
-
-### 1. AUDIT — "check my site"
-
-When the user wants to evaluate an existing site or repo. Signals: "audit", "check", "is my site ready", passes a URL, points at a local repo.
-
-Approach:
-1. If a URL is given, prefer the Cloudflare tool's MCP endpoint: `https://isitagentready.com/.well-known/mcp.json` (tool: `scan_site`). Authoritative implementation exposed via standard MCP.
-2. If that's not available, use `npx agentic-seo --url <url>` (Addy's tool). Readable, no API key, covers ~80% of the same checks.
-3. For a local repo, `cd` into it and run `npx agentic-seo`. Auto-detects Next.js, Docusaurus, Astro, Hugo, Jekyll.
-4. If no tools available (e.g. read-only/sandboxed environment), fall back to native checks via `WebFetch`: pull `/robots.txt`, `/llms.txt`, `/sitemap.xml`, `/.well-known/api-catalog`, `/.well-known/agent-skills/index.json`, `/.well-known/ai-catalog.json`, `/.well-known/ard.json` (the two site-wide lists that point to MCP Server Cards; older sites may still use `/.well-known/mcp/server-card.json`), `/AGENTS.md`, and the homepage. Check for Markdown negotiation by noting absence of `.md` URLs in the source.
-5. Read the output and **prioritize by leverage** — surface what actually moves the needle:
-   - **Critical:** robots.txt accidentally blocks AI crawlers, no Markdown negotiation, token-heavy pages
-   - **High-value easy wins:** llms.txt, AGENTS.md, Content Signals in robots.txt
-   - **Strategic if applicable:** MCP Server Card, Agent Skills index, API Catalog (recommend when the site has APIs or workflows agents should invoke)
-
-Output a prioritized fix list with concrete file contents, not just a grade.
-
-### 2. AUTHOR — "make my site ready"
-
-When the user wants to generate the actual files. Signals: "add llms.txt", "write robots.txt for AI", "create AGENTS.md", "scaffold agent-ready files".
-
-Ask first:
-- Is this a **docs site**, a **marketing site**, a **SaaS app**, an **e-commerce site**, or a **code repo**? The right files differ.
-- Do they have a policy on AI training vs. AI search vs. user-triggered agents? (Default to *allow all with attribution via Content Signals* unless told otherwise — opt-in to the agent economy is usually the right move.)
-- Do they have APIs or workflows agents should invoke? (If yes, include protocol-discovery files. If no, skip them.)
-
-Then generate from templates in `assets/templates/`. **Default recommendation is full adoption** — all the files that apply to the site type. Each is low-cost to publish and compounds with the others.
-
-| File | When to include | Template |
-|---|---|---|
-| `robots.txt` | Always | `assets/templates/robots.txt` |
-| `AGENTS.md` (repo root) | Code repos, and strongly recommended for any site with docs | `assets/templates/AGENTS.md` |
-| `llms.txt` (site root) | Any content site | `assets/templates/llms.txt` |
-| `/.well-known/api-catalog` | Site has public APIs | `assets/templates/api-catalog.json` |
-| `/.well-known/agent-skills/index.json` | Site offers agent-invocable workflows | `assets/templates/agent-skills-index.json` |
-| MCP Server Card (at `<server address>/server-card`) and the list that points to it (`/.well-known/ai-catalog.json`, same file at `/.well-known/ard.json`) | Site runs a remote MCP server | `assets/templates/mcp-server-card.json`, `assets/templates/ai-catalog.json` |
-| Landing page, connect links and registry listing for an MCP server | Site runs a remote MCP server that people should add to their assistant | No template: follow "Promoting an MCP server" in `references/protocol-discovery.md` |
-| WebMCP tools (in-page JavaScript) | Site has a visitor journey an agent could serve: find a location, get a price range, search products, start a request | No template: follow `references/webmcp-build-guide.md` |
-| Markdown content negotiation rule | Any site with textual content | See `references/content-accessibility.md` |
-| Content Signals in robots.txt | Any content site | See `references/bot-access-control.md` |
-| "Copy for AI" buttons | Docs and marketing pages | See `references/content-accessibility.md` |
-
-Generate to a staging directory first (`./agent-ready-draft/` or similar). Never overwrite an existing file without explicit confirmation — existing files may contain user customizations.
-
-### 3. REFERENCE — "what is X"
-
-When the user asks a question about the landscape. Signals: "what's llms.txt", "does Google use X", "is AGENTS.md a real standard", "should I care about MCP Server Cards".
-
-Answer from `references/` files. Habits:
-- State adoption status (proposal / draft RFC / Linux Foundation spec / shipped standard) so the user can weigh effort vs. assurance.
-- Cite the primary source, not secondary coverage.
-- When adoption is early, frame it as first-mover advantage rather than dismissing. Most of these standards are inexpensive to publish.
-
-## When to read the reference files
-
-Load the relevant file from `references/` as needed:
-
-- `references/discoverability.md` — robots.txt syntax for AI bots, sitemap, Link headers, named AI user agents (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, etc.)
-- `references/content-accessibility.md` — Markdown negotiation setup (Cloudflare Rules, nginx, Express), llms.txt format, Addy's token budget ladder (15k/20k/25k/30k)
-- `references/bot-access-control.md` — Content Signals directives (ai-train, ai-input, search), Web Bot Auth, distinguishing training vs. search vs. user-action bots
-- `references/protocol-discovery.md` — API Catalog RFC 9727, Agent Skills index format, MCP Server Card JSON and where it lives, AI Catalog and ARD (the site-wide list), OAuth discovery, and promoting an MCP server: landing page, connect links for Claude and ChatGPT, JSON-LD, MCP Registry, the tests to run first, who it is worth it for, and why none of it applies to in-page WebMCP tools
-- `references/webmcp-build-guide.md` — field notes from live WebMCP builds: tool design rules, the three tool hints (read-only, consequential, untrusted content), reading answers from the site's own content (and the traps), a security pass for the knowledge route (password pages, loopback fetches, inline config, section names), re-checking older plugins against the whole guide and handling copies made elsewhere, topic map for high-intent questions, page speed, caching with wp-admin access only (including served-page copies after an edit or after a page is hidden), tool-use events for GA4 through Tag Manager, origin-trial token, the testing ladder, release checklist, working with the site owner. Read it before building, reviewing, testing or shipping WebMCP tools.
-- `references/agents-md.md` — AGENTS.md spec, what goes in it, how it differs from README.md and CLAUDE.md
-- `references/adoption-stats.md` — Cloudflare Radar numbers + primary-source citations (refresh check before quoting)
+Details and dates are in section 1 of the guide.
 
 ## Good habits
 
-- Treat `skill.md` and `agent-permissions.json` as experimental Addy Osmani proposals. Offer them if the user is enthusiastic about leading-edge adoption, but they're not currently consumed by production agents.
-- Cite adoption stats with their date (Apr 2026 Cloudflare Radar) so the user knows the space moves.
-- `llms.txt` is a curated reading list, not a sitemap. Keep it under 5,000 tokens — include only the most important entry points.
-- Default Content Signals to *allow AI with attribution* unless the user has a reason to restrict. The agent economy is growing; opting out by default often hurts the site's reach.
-- WebMCP tools never submit a form for the user and do not change search rankings; say both plainly. Details in `references/webmcp-build-guide.md`.
-- Stage drafts in a separate directory and diff against existing files. Customizations in `robots.txt`, `AGENTS.md`, or similar are common and easy to clobber.
+- When the guide gains a rule, re-check the builds made before it. In one security review, all the faults were in the oldest build, which predated the rules.
+- Never throw from a tool; return an answer the agent can act on. Add `outputSchema` only where it pays, and only with a test that checks every kind of answer against it.
+- Keep answers inside Chrome's size guidance and read them from the site's own pages. Re-check any fallback data file against the live site at each release.
+- Date every version number, trial date and adoption claim you quote.
+- Give the site owner the same two plain facts every time: no ranking effect, Chromium only.
+
+## Not this skill
+
+Making a site readable for AI agents in general (robots.txt for AI bots, Content Signals, llms.txt, Markdown for agents, AGENTS.md, MCP Server Cards, API Catalog, a Cloudflare Agent Readiness audit) belongs to the agent-readiness skill: [github.com/Pacamaraprogress/agent-readiness](https://github.com/Pacamaraprogress/agent-readiness).
 
 ## Primary sources
 
-Cite these, not secondary coverage:
-
-- [Agentic Engine Optimization — Addy Osmani](https://addyosmani.com/blog/agentic-engine-optimization/)
-- [addyosmani/agentic-seo](https://github.com/addyosmani/agentic-seo)
-- [Introducing the Agent Readiness Score — Cloudflare](https://blog.cloudflare.com/agent-readiness/)
-- [Cloudflare Agents Week 2026](https://www.cloudflare.com/agents-week/)
-- [Cloudflare Agents docs](https://developers.cloudflare.com/agents/)
-- [isitagentready.com](https://isitagentready.com/)
-- [llms.txt spec (Jeremy Howard, Answer.AI)](https://llmstxt.org/)
-- [Content Signals](https://contentsignals.org/)
-- [Google Search Central — Crawlers overview](https://developers.google.com/search/docs/crawling-indexing/overview-google-crawlers)
+- [WebMCP specification](https://webmachinelearning.github.io/webmcp/) (W3C Web Machine Learning Community Group draft)
+- [webmachinelearning/webmcp](https://github.com/webmachinelearning/webmcp) and its [implementation status page](https://github.com/webmachinelearning/webmcp/blob/main/implementation-status.md)
+- [webmachinelearning/webmcp-types](https://github.com/webmachinelearning/webmcp-types)
+- [w3c-oss/webmcp-polyfill](https://github.com/w3c-oss/webmcp-polyfill) (test pages only)
+- [GoogleChromeLabs/webmcp-tools](https://github.com/GoogleChromeLabs/webmcp-tools) and [GoogleChromeLabs/webmcp-extension](https://github.com/GoogleChromeLabs/webmcp-extension)
+- [Chrome WebMCP documentation](https://developer.chrome.com/docs/ai/webmcp)

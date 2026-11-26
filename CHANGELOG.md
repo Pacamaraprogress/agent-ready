@@ -2,6 +2,20 @@
 
 Weekly updates are planned. Each entry matches a [GitHub release](https://github.com/Pacamaraprogress/agent-ready/releases), whose `agent-ready.zip` is the file to upload to claude.ai or Claude Desktop.
 
+## 2026.11.26
+
+The skill is now about WebMCP only.
+
+- The general agent-readiness material moved to its own skill, [agent-readiness](https://github.com/Pacamaraprogress/agent-readiness), where it was rewritten and checked again on 26 November 2026: robots.txt for AI bots, Content Signals, llms.txt, Markdown for agents, AGENTS.md, MCP Server Cards, AI Catalog, API Catalog, the audit checklist and the file templates. These 14 files left this repo (git history keeps them):
+  - `assets/checklists/audit-checklist.md`
+  - `assets/templates/`: `AGENTS.md`, `agent-skills-index.json`, `ai-catalog.json`, `api-catalog.json`, `llms.txt`, `mcp-server-card.json`, `robots.txt`
+  - `references/`: `adoption-stats.md`, `agents-md.md`, `bot-access-control.md`, `content-accessibility.md`, `discoverability.md`, `protocol-discovery.md`
+- `SKILL.md` rewritten for WebMCP: which guide section answers which request, the order of work, the browser list and the official sources.
+- Build guide:
+  - New note on spec PR #373, `waitForToolsUntil()` (merged 24 Nov 2026): what it does, and how to use it once a browser ships it.
+  - The two links to `protocol-discovery.md` now point to the agent-readiness skill, and the opening says when tools are worth building.
+- README: "What's inside" lists the two files, and the "smaller reference" paragraph is replaced by a link to agent-readiness. The "seo" keyword is gone from the plugin files.
+
 ## 2026.11.25
 
 Fixes from an independent review. Factual corrections were checked against their sources; the wording changes are judgement calls.
